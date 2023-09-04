@@ -33,6 +33,10 @@ void clock_init(void){
     __delay_cycles(60);
     CSCTL3 = DIVA__1 | DIVS__1 | DIVM__1;   // Set all dividers to 1 for 16MHz operation
     CSCTL0_H = 0;                           // Lock CS registersock CS registers
+
+    P1SEL0 |= BIT2; // Set P1.2 pin for PWM output.
+    P1DIR |= BIT2;
+
     _enable_interrupt();
 }
 

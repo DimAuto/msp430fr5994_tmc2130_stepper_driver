@@ -1,7 +1,7 @@
 ******************************************************************************
                   MSP430 Linker PC v21.6.1                     
 ******************************************************************************
->> Linked Mon Sep  4 13:04:56 2023
+>> Linked Mon Sep  4 15:03:16 2023
 
 OUTPUT FILE NAME:   <tmc-stepper-driver.out>
 ENTRY POINT SYMBOL: "_c_int00_noargs_mpu"  address: 0000458a
@@ -80,7 +80,7 @@ MEMORY CONFIGURATION
   INT53                 0000fffa   00000002  00000002  00000000  RWIX
   INT54                 0000fffc   00000002  00000002  00000000  RWIX
   RESET                 0000fffe   00000002  00000002  00000000  RWIX
-  FRAM2                 00010000   00033ff8  00000f58  000330a0  RWIX
+  FRAM2                 00010000   00033ff8  00000f94  00033064  RWIX
 
 
 SECTION ALLOCATION MAP
@@ -309,67 +309,67 @@ SYSNMI     0    0000fffc    00000002
                   000045fc    00000002     message_handler.obj (.const:.string:$P$T1$2)
                   000045fe    00000002     message_handler.obj (.const:.string:$P$T3$4)
 
-.text      0    00010000    00000f58     
+.text      0    00010000    00000f94     
                   00010000    00000162     gpio.obj (.text:gpio_initPin)
-                  00010162    000000d0     tmc2130.obj (.text:tmc2130_init)
-                  00010232    000000cc     uart.obj (.text:uart_init)
-                  000102fe    000000ca     message_handler.obj (.text:parseMessage)
-                  000103c8    000000b8     rts430x_lc_rd_eabi.lib : fs_mpy.asm.obj (.text)
-                  00010480    000000a2     uart.obj (.text:uart_select)
-                  00010522    000000a0     uart.obj (.text:uart_read_RB)
-                  000105c2    00000090     rts430x_lc_rd_eabi.lib : fs_div.asm.obj (.text)
-                  00010652    00000088     message_handler.obj (.text:tick_Handler)
-                  000106da    0000007c     message_handler.obj (.text:handler)
-                  00010756    00000076     rts430x_lc_rd_eabi.lib : copy_decompress_lzss.c.obj (.text:decompress:lzss:__TI_decompress_lzss)
-                  000107cc    0000006c     spi.obj (.text:SPI_Master_WriteReg)
-                  00010838    00000064     message_handler.obj (.text:sendAck)
-                  0001089c    00000064     message_handler.obj (.text:sendNack)
-                  00010900    0000005e     main.obj (.text:system_init)
-                  0001095e    00000054     rts430x_lc_rd_eabi.lib : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit_hold_wdt:__TI_auto_init_nobinit_nopinit_hold_wdt)
-                  000109b2    00000046     adc.obj (.text:adc_init)
-                  000109f8    00000046     timer.obj (.text:clock_init)
-                  00010a3e    00000046     rts430x_lc_rd_eabi.lib : fs_tou.asm.obj (.text)
-                  00010a84    00000046     uart.obj (.text:uart_write_RB)
-                  00010aca    00000044     tmc2130.obj (.text:tmc2130_rotate_steps)
-                  00010b0e    00000044     tmc2130.obj (.text:tmc2130_spi_transfer)
-                  00010b52    0000003e     ring_buffer.obj (.text:RB_push)
-                  00010b90    0000003c     message_handler.obj (.text:calcChecksum)
-                  00010bcc    00000038     message_handler.obj (.text:init_message_t)
-                  00010c04    00000038     uart.obj (.text:uart_write_DEBUG)
-                  00010c3c    00000034     ring_buffer.obj (.text:RB_pop)
-                  00010c70    0000002c     MSPMPU_INIT_LIB_CCS_msp430_large_code_restricted_data.lib : mpu_init.o (.text:__mpu_init)
-                  00010c9c    0000002c     spi.obj (.text:initSPI)
-                  00010cc8    0000002c     rts430x_lc_rd_eabi.lib : div16s.asm.obj (.text)
-                  00010cf4    00000028     ring_buffer.obj (.text:RB_init)
-                  00010d1c    00000024     rts430x_lc_rd_eabi.lib : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init_nomemset:__TI_zero_init_nomemset)
-                  00010d40    00000024                            : fs_utof.asm.obj (.text)
-                  00010d64    00000022     ring_buffer.obj (.text:RB_isFull)
-                  00010d86    00000022     timer.obj (.text:pwm_set)
-                  00010da8    00000020     timer.obj (.text:timer_init)
-                  00010dc8    0000001e     gpio.obj (.text:gpio_writePin)
-                  00010de6    0000001c     spi.obj (.text:CopyArray)
-                  00010e02    0000001c     timer.obj (.text:delayMS)
-                  00010e1e    0000001c     tmc2130.obj (.text:tmc2130_set_dir)
-                  00010e3a    0000001a     ring_buffer.obj (.text:RB_clear)
-                  00010e54    0000001a     ring_buffer.obj (.text:RB_size)
-                  00010e6e    0000001a     gpio.obj (.text:gpio_setMode)
-                  00010e88    00000016     rts430x_lc_rd_eabi.lib : memset.c.obj (.text:memset)
-                  00010e9e    00000016                            : div16u.asm.obj (.text)
-                  00010eb4    00000014                            : memcpy.c.obj (.text:memcpy)
-                  00010ec8    00000012                            : copy_decompress_none.c.obj (.text:decompress:none:__TI_decompress_none)
-                  00010eda    00000010     ring_buffer.obj (.text:RB_isEmpty)
-                  00010eea    00000010     timer.obj (.text:ellapsed_millis)
-                  00010efa    0000000e     spi.obj (.text:SendUCB1Data)
-                  00010f08    0000000c     main.obj (.text:main)
-                  00010f14    0000000c     tmc2130.obj (.text:tmc2130_disable)
-                  00010f20    0000000c     tmc2130.obj (.text:tmc2130_enable)
-                  00010f2c    0000000c     uart.obj (.text:uart_RX_getSize)
-                  00010f38    00000008     timer.obj (.text:watchdog_stop)
-                  00010f40    00000006     pmm.obj (.text:PMM_unlockLPM5)
-                  00010f46    00000006     rts430x_lc_rd_eabi.lib : exit.c.obj (.text:abort)
-                  00010f4c    00000006     timer.obj (.text:millis)
-                  00010f52    00000004     rts430x_lc_rd_eabi.lib : pre_init.c.obj (.text:_system_pre_init)
-                  00010f56    00000002                            : startup.c.obj (.text:_system_post_cinit)
+                  00010162    00000104     tmc2130.obj (.text:tmc2130_init)
+                  00010266    000000cc     uart.obj (.text:uart_init)
+                  00010332    000000ca     message_handler.obj (.text:parseMessage)
+                  000103fc    000000b8     rts430x_lc_rd_eabi.lib : fs_mpy.asm.obj (.text)
+                  000104b4    000000a2     uart.obj (.text:uart_select)
+                  00010556    000000a0     uart.obj (.text:uart_read_RB)
+                  000105f6    00000090     rts430x_lc_rd_eabi.lib : fs_div.asm.obj (.text)
+                  00010686    00000088     message_handler.obj (.text:tick_Handler)
+                  0001070e    0000007c     message_handler.obj (.text:handler)
+                  0001078a    00000076     rts430x_lc_rd_eabi.lib : copy_decompress_lzss.c.obj (.text:decompress:lzss:__TI_decompress_lzss)
+                  00010800    0000006c     spi.obj (.text:SPI_Master_WriteReg)
+                  0001086c    00000064     message_handler.obj (.text:sendAck)
+                  000108d0    00000064     message_handler.obj (.text:sendNack)
+                  00010934    0000005e     main.obj (.text:system_init)
+                  00010992    00000054     rts430x_lc_rd_eabi.lib : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit_hold_wdt:__TI_auto_init_nobinit_nopinit_hold_wdt)
+                  000109e6    0000004e     timer.obj (.text:clock_init)
+                  00010a34    00000046     adc.obj (.text:adc_init)
+                  00010a7a    00000046     rts430x_lc_rd_eabi.lib : fs_tou.asm.obj (.text)
+                  00010ac0    00000046     uart.obj (.text:uart_write_RB)
+                  00010b06    00000044     tmc2130.obj (.text:tmc2130_rotate_steps)
+                  00010b4a    00000044     tmc2130.obj (.text:tmc2130_spi_transfer)
+                  00010b8e    0000003e     ring_buffer.obj (.text:RB_push)
+                  00010bcc    0000003c     message_handler.obj (.text:calcChecksum)
+                  00010c08    00000038     message_handler.obj (.text:init_message_t)
+                  00010c40    00000038     uart.obj (.text:uart_write_DEBUG)
+                  00010c78    00000034     ring_buffer.obj (.text:RB_pop)
+                  00010cac    0000002c     MSPMPU_INIT_LIB_CCS_msp430_large_code_restricted_data.lib : mpu_init.o (.text:__mpu_init)
+                  00010cd8    0000002c     spi.obj (.text:initSPI)
+                  00010d04    0000002c     rts430x_lc_rd_eabi.lib : div16s.asm.obj (.text)
+                  00010d30    00000028     ring_buffer.obj (.text:RB_init)
+                  00010d58    00000024     rts430x_lc_rd_eabi.lib : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init_nomemset:__TI_zero_init_nomemset)
+                  00010d7c    00000024                            : fs_utof.asm.obj (.text)
+                  00010da0    00000022     ring_buffer.obj (.text:RB_isFull)
+                  00010dc2    00000022     timer.obj (.text:pwm_set)
+                  00010de4    00000020     timer.obj (.text:timer_init)
+                  00010e04    0000001e     gpio.obj (.text:gpio_writePin)
+                  00010e22    0000001c     spi.obj (.text:CopyArray)
+                  00010e3e    0000001c     timer.obj (.text:delayMS)
+                  00010e5a    0000001c     tmc2130.obj (.text:tmc2130_set_dir)
+                  00010e76    0000001a     ring_buffer.obj (.text:RB_clear)
+                  00010e90    0000001a     ring_buffer.obj (.text:RB_size)
+                  00010eaa    0000001a     gpio.obj (.text:gpio_setMode)
+                  00010ec4    00000016     rts430x_lc_rd_eabi.lib : memset.c.obj (.text:memset)
+                  00010eda    00000016                            : div16u.asm.obj (.text)
+                  00010ef0    00000014                            : memcpy.c.obj (.text:memcpy)
+                  00010f04    00000012                            : copy_decompress_none.c.obj (.text:decompress:none:__TI_decompress_none)
+                  00010f16    00000010     ring_buffer.obj (.text:RB_isEmpty)
+                  00010f26    00000010     timer.obj (.text:ellapsed_millis)
+                  00010f36    0000000e     spi.obj (.text:SendUCB1Data)
+                  00010f44    0000000c     main.obj (.text:main)
+                  00010f50    0000000c     tmc2130.obj (.text:tmc2130_disable)
+                  00010f5c    0000000c     tmc2130.obj (.text:tmc2130_enable)
+                  00010f68    0000000c     uart.obj (.text:uart_RX_getSize)
+                  00010f74    00000008     timer.obj (.text:watchdog_stop)
+                  00010f7c    00000006     pmm.obj (.text:PMM_unlockLPM5)
+                  00010f82    00000006     rts430x_lc_rd_eabi.lib : exit.c.obj (.text:abort)
+                  00010f88    00000006     timer.obj (.text:millis)
+                  00010f8e    00000004     rts430x_lc_rd_eabi.lib : pre_init.c.obj (.text:_system_pre_init)
+                  00010f92    00000002                            : startup.c.obj (.text:_system_post_cinit)
 
 MODULE SUMMARY
 
@@ -382,21 +382,21 @@ MODULE SUMMARY
                                                             
     .\src\
        message_handler.obj          778    10        59     
-       tmc2130.obj                  396    0         0      
+       tmc2130.obj                  448    0         0      
        main.obj                     106    16        36     
     +--+----------------------------+------+---------+---------+
-       Total:                       1280   26        95     
+       Total:                       1332   26        95     
                                                             
     .\src\core\
        uart.obj                     1288   6         292    
        i2c.obj                      536    4         141    
        spi.obj                      408    2         47     
        gpio.obj                     410    0         0      
-       timer.obj                    244    6         8      
+       timer.obj                    252    6         8      
        ring_buffer.obj              256    0         0      
        adc.obj                      114    2         24     
     +--+----------------------------+------+---------+---------+
-       Total:                       3256   20        512    
+       Total:                       3264   20        512    
                                                             
     C:\ti\ccs1120\ccs\ccs_base\msp430\lib\FR59xx\MSPMPU_INIT_LIB_CCS_msp430_large_code_restricted_data.lib
        mpu_init.o                   44     0         0      
@@ -454,7 +454,7 @@ MODULE SUMMARY
        Stack:                       0      0         160    
        Linker Generated:            0      48        0      
     +--+----------------------------+------+---------+---------+
-       Grand Total:                 5436   150       767    
+       Grand Total:                 5496   150       767    
 
 
 LINKER GENERATED COPY TABLES
@@ -738,7 +738,7 @@ address   name
 000004bc  BIN2BCD                                
 000004bd  BIN2BCD_H                              
 000004bc  BIN2BCD_L                              
-00010f46  C$$EXIT                                
+00010f82  C$$EXIT                                
 0000043e  CAPTIO0CTL                             
 0000043f  CAPTIO0CTL_H                           
 0000043e  CAPTIO0CTL_L                           
@@ -832,7 +832,7 @@ address   name
 0000016c  CSCTL6                                 
 0000016d  CSCTL6_H                               
 0000016c  CSCTL6_L                               
-00010de6  CopyArray                              
+00010e22  CopyArray                              
 00000510  DMA0CTL                                
 00000511  DMA0CTL_H                              
 00000510  DMA0CTL_L                              
@@ -1361,14 +1361,14 @@ address   name
 0000012a  PMMIFG                                 
 0000012b  PMMIFG_H                               
 0000012a  PMMIFG_L                               
-00010f40  PMM_unlockLPM5                         
-00010e3a  RB_clear                               
-00010cf4  RB_init                                
-00010eda  RB_isEmpty                             
-00010d64  RB_isFull                              
-00010c3c  RB_pop                                 
-00010b52  RB_push                                
-00010e54  RB_size                                
+00010f7c  PMM_unlockLPM5                         
+00010e76  RB_clear                               
+00010d30  RB_init                                
+00010f16  RB_isEmpty                             
+00010da0  RB_isFull                              
+00010c78  RB_pop                                 
+00010b8e  RB_push                                
+00010e90  RB_size                                
 00000158  RCCTL0                                 
 00000159  RCCTL0_H                               
 00000158  RCCTL0_L                               
@@ -1458,7 +1458,7 @@ address   name
 00000104  SFRRPCR                                
 00000105  SFRRPCR_H                              
 00000104  SFRRPCR_L                              
-000107cc  SPI_Master_WriteReg                    
+00010800  SPI_Master_WriteReg                    
 000004ce  SUMEXT                                 
 000004cf  SUMEXT_H                               
 000004ce  SUMEXT_L                               
@@ -1489,7 +1489,7 @@ address   name
 0000019a  SYSUNIV                                
 0000019b  SYSUNIV_H                              
 0000019a  SYSUNIV_L                              
-00010efa  SendUCB1Data                           
+00010f36  SendUCB1Data                           
 00000352  TA0CCR0                                
 00000353  TA0CCR0_H                              
 00000352  TA0CCR0_L                              
@@ -2055,9 +2055,9 @@ address   name
 0000460e  __TI_Handler_Table_Base                
 0000461a  __TI_Handler_Table_Limit               
 000045d6  __TI_ISR_TRAP                          
-0001095e  __TI_auto_init_nobinit_nopinit_hold_wdt
-00010756  __TI_decompress_lzss                   
-00010ec8  __TI_decompress_none                   
+00010992  __TI_auto_init_nobinit_nopinit_hold_wdt
+0001078a  __TI_decompress_lzss                   
+00010f04  __TI_decompress_none                   
 0000ffb4  __TI_int18                             
 0000ffb6  __TI_int19                             
 0000ffb8  __TI_int20                             
@@ -2098,71 +2098,71 @@ address   name
 ffffffff  __TI_pprof_out_hndl                    
 ffffffff  __TI_prof_data_size                    
 ffffffff  __TI_prof_data_start                   
-00010d1c  __TI_zero_init_nomemset                
+00010d58  __TI_zero_init_nomemset                
 ffffffff  __c_args__                             
 00000001  __mpu_enable                           
-00010c70  __mpu_init                             
-000105c2  __mspabi_divf                          
-00010cc8  __mspabi_divi                          
-00010e9e  __mspabi_divu                          
-00010a3e  __mspabi_fixfu                         
-00010d40  __mspabi_fltuf                         
-000103c8  __mspabi_mpyf                          
-00010cc8  __mspabi_remi                          
-00010e9e  __mspabi_remu                          
+00010cac  __mpu_init                             
+000105f6  __mspabi_divf                          
+00010d04  __mspabi_divi                          
+00010eda  __mspabi_divu                          
+00010a7a  __mspabi_fixfu                         
+00010d7c  __mspabi_fltuf                         
+000103fc  __mspabi_mpyf                          
+00010d04  __mspabi_remi                          
+00010eda  __mspabi_remu                          
 0000458a  _c_int00_noargs_mpu                    
 0000fffe  _reset_vector                          
 00002b60  _stack                                 
-00010f56  _system_post_cinit                     
-00010f52  _system_pre_init                       
-00010f46  abort                                  
-000109b2  adc_init                               
+00010f92  _system_post_cinit                     
+00010f8e  _system_pre_init                       
+00010f82  abort                                  
+00010a34  adc_init                               
 00001d4c  adc_values                             
 00001e59  buffer_size                            
-000109f8  clock_init                             
-00010e02  delayMS                                
-00010eea  ellapsed_millis                        
+000109e6  clock_init                             
+00010e3e  delayMS                                
+00010f26  ellapsed_millis                        
 00004000  fram_ipe_end                           
 00004000  fram_ipe_start                         
 00004000  fram_rw_start                          
 00004000  fram_rx_start                          
 00010000  gpio_initPin                           
-00010e6e  gpio_setMode                           
-00010dc8  gpio_writePin                          
-00010c9c  initSPI                                
-00010f08  main                                   
-00010eb4  memcpy                                 
-00010e88  memset                                 
-00010f4c  millis                                 
+00010eaa  gpio_setMode                           
+00010e04  gpio_writePin                          
+00010cd8  initSPI                                
+00010f44  main                                   
+00010ef0  memcpy                                 
+00010ec4  memset                                 
+00010f88  millis                                 
 0000a501  mpu_ctl0_value                         
 00001513  mpu_sam_value                          
 00000400  mpu_segment_border1                    
 00000400  mpu_segment_border2                    
-000102fe  parseMessage                           
-00010d86  pwm_set                                
+00010332  parseMessage                           
+00010dc2  pwm_set                                
 00001d08  rot_motor                              
-00010838  sendAck                                
-0001089c  sendNack                               
+0001086c  sendAck                                
+000108d0  sendNack                               
 00001e57  start_char                             
 00001e58  stop_char                              
-00010652  tick_Handler                           
-00010da8  timer_init                             
-00010f14  tmc2130_disable                        
-00010f20  tmc2130_enable                         
+00010686  tick_Handler                           
+00010de4  timer_init                             
+00010f50  tmc2130_disable                        
+00010f5c  tmc2130_enable                         
 00010162  tmc2130_init                           
-00010aca  tmc2130_rotate_steps                   
-00010e1e  tmc2130_set_dir                        
+00010b06  tmc2130_rotate_steps                   
+00010e5a  tmc2130_set_dir                        
 00001e53  transEnd_debug                         
 00001d76  transEnd_flag_ptr                      
 00001e54  transEnd_iris                          
 00001e55  transEnd_nyx                           
-00010f2c  uart_RX_getSize                        
-00010232  uart_init                              
-00010522  uart_read_RB                           
-00010480  uart_select                            
-00010c04  uart_write_DEBUG                       
-00010a84  uart_write_RB                          
-00010f38  watchdog_stop                          
+00010f68  uart_RX_getSize                        
+00010266  uart_init                              
+00010556  uart_read_RB                           
+000104b4  uart_select                            
+00010c40  uart_write_DEBUG                       
+00010ac0  uart_write_RB                          
+00010f74  watchdog_stop                          
 
 
 GLOBAL SYMBOLS: SORTED BY Symbol Address 
@@ -3796,62 +3796,62 @@ address   name
 0000fffe  _reset_vector                          
 00010000  gpio_initPin                           
 00010162  tmc2130_init                           
-00010232  uart_init                              
-000102fe  parseMessage                           
-000103c8  __mspabi_mpyf                          
-00010480  uart_select                            
-00010522  uart_read_RB                           
-000105c2  __mspabi_divf                          
-00010652  tick_Handler                           
-00010756  __TI_decompress_lzss                   
-000107cc  SPI_Master_WriteReg                    
-00010838  sendAck                                
-0001089c  sendNack                               
-0001095e  __TI_auto_init_nobinit_nopinit_hold_wdt
-000109b2  adc_init                               
-000109f8  clock_init                             
-00010a3e  __mspabi_fixfu                         
-00010a84  uart_write_RB                          
-00010aca  tmc2130_rotate_steps                   
-00010b52  RB_push                                
-00010c04  uart_write_DEBUG                       
-00010c3c  RB_pop                                 
-00010c70  __mpu_init                             
-00010c9c  initSPI                                
-00010cc8  __mspabi_divi                          
-00010cc8  __mspabi_remi                          
-00010cf4  RB_init                                
-00010d1c  __TI_zero_init_nomemset                
-00010d40  __mspabi_fltuf                         
-00010d64  RB_isFull                              
-00010d86  pwm_set                                
-00010da8  timer_init                             
-00010dc8  gpio_writePin                          
-00010de6  CopyArray                              
-00010e02  delayMS                                
-00010e1e  tmc2130_set_dir                        
-00010e3a  RB_clear                               
-00010e54  RB_size                                
-00010e6e  gpio_setMode                           
-00010e88  memset                                 
-00010e9e  __mspabi_divu                          
-00010e9e  __mspabi_remu                          
-00010eb4  memcpy                                 
-00010ec8  __TI_decompress_none                   
-00010eda  RB_isEmpty                             
-00010eea  ellapsed_millis                        
-00010efa  SendUCB1Data                           
-00010f08  main                                   
-00010f14  tmc2130_disable                        
-00010f20  tmc2130_enable                         
-00010f2c  uart_RX_getSize                        
-00010f38  watchdog_stop                          
-00010f40  PMM_unlockLPM5                         
-00010f46  C$$EXIT                                
-00010f46  abort                                  
-00010f4c  millis                                 
-00010f52  _system_pre_init                       
-00010f56  _system_post_cinit                     
+00010266  uart_init                              
+00010332  parseMessage                           
+000103fc  __mspabi_mpyf                          
+000104b4  uart_select                            
+00010556  uart_read_RB                           
+000105f6  __mspabi_divf                          
+00010686  tick_Handler                           
+0001078a  __TI_decompress_lzss                   
+00010800  SPI_Master_WriteReg                    
+0001086c  sendAck                                
+000108d0  sendNack                               
+00010992  __TI_auto_init_nobinit_nopinit_hold_wdt
+000109e6  clock_init                             
+00010a34  adc_init                               
+00010a7a  __mspabi_fixfu                         
+00010ac0  uart_write_RB                          
+00010b06  tmc2130_rotate_steps                   
+00010b8e  RB_push                                
+00010c40  uart_write_DEBUG                       
+00010c78  RB_pop                                 
+00010cac  __mpu_init                             
+00010cd8  initSPI                                
+00010d04  __mspabi_divi                          
+00010d04  __mspabi_remi                          
+00010d30  RB_init                                
+00010d58  __TI_zero_init_nomemset                
+00010d7c  __mspabi_fltuf                         
+00010da0  RB_isFull                              
+00010dc2  pwm_set                                
+00010de4  timer_init                             
+00010e04  gpio_writePin                          
+00010e22  CopyArray                              
+00010e3e  delayMS                                
+00010e5a  tmc2130_set_dir                        
+00010e76  RB_clear                               
+00010e90  RB_size                                
+00010eaa  gpio_setMode                           
+00010ec4  memset                                 
+00010eda  __mspabi_divu                          
+00010eda  __mspabi_remu                          
+00010ef0  memcpy                                 
+00010f04  __TI_decompress_none                   
+00010f16  RB_isEmpty                             
+00010f26  ellapsed_millis                        
+00010f36  SendUCB1Data                           
+00010f44  main                                   
+00010f50  tmc2130_disable                        
+00010f5c  tmc2130_enable                         
+00010f68  uart_RX_getSize                        
+00010f74  watchdog_stop                          
+00010f7c  PMM_unlockLPM5                         
+00010f82  C$$EXIT                                
+00010f82  abort                                  
+00010f88  millis                                 
+00010f8e  _system_pre_init                       
+00010f92  _system_post_cinit                     
 ffffffff  __TI_pprof_out_hndl                    
 ffffffff  __TI_prof_data_size                    
 ffffffff  __TI_prof_data_start                   
