@@ -287,13 +287,28 @@ void handler(UART_select device){
         uint16_t dir = ((msg.data[3] << 8) | msg.data[2]);
         uint16_t speed = ((msg.data[5] << 8) | msg.data[4]);
         uint16_t dc = ((msg.data[7] << 8) | msg.data[6]);
-        tmc2130_rotate_steps(&rot_motor, steps, dir, dc, speed);
+        tmc2130_rotate_steps(&rot_motor, steps, dir, dc, speed, ROT_MOTOR);
         break;
     case 0xB1:
         tmc2130_enable(&rot_motor);
         break;
     case 0xB2:
         tmc2130_disable(&rot_motor);
+        break;
+    case 0xC0:
+        //rotate with steps
+        ;  //to avoid compiler error
+        uint16_t steps2 = ((msg.data[1] << 8) | msg.data[0]);
+        uint16_t dir2 = ((msg.data[3] << 8) | msg.data[2]);
+        uint16_t speed2 = ((msg.data[5] << 8) | msg.data[4]);
+        uint16_t dc2 = ((msg.data[7] << 8) | msg.data[6]);
+        tmc2130_rotate_steps(&inc_motor, steps2, dir2, dc2, speed2, INC_MOTOR);
+        break;
+    case 0xC1:
+        tmc2130_enable(&inc_motor);
+        break;
+    case 0xC2:
+        tmc2130_disable(&inc_motor);
         break;
     default:
         break;

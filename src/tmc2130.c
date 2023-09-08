@@ -32,6 +32,7 @@ SPI_Mode tmc2130_init(tmc2130_driver_t *driver, uint8_t CS_port, uint8_t CS_pin,
     gpio_initPin(&(driver->CS_Pin), CS_port, CS_pin, OUTPUT);
     gpio_initPin(&(driver->EN_Pin), EN_port, EN_pin, OUTPUT);
     gpio_writePin(&(driver->EN_Pin), HIGH);
+    delayMS(200);
     res = tmc2130_spi_transfer(driver, GCONF_ADDR, GCONF);
     delayMS(100);
     res = tmc2130_spi_transfer(driver, TCOOLTHRS_ADDR, TCOOLTHRS);
@@ -42,10 +43,10 @@ SPI_Mode tmc2130_init(tmc2130_driver_t *driver, uint8_t CS_port, uint8_t CS_pin,
     delayMS(100);
     res = tmc2130_spi_transfer(driver, IHOLD_IRUN_ADDR, IHOLDIRUN);
     delayMS(100);
-    res = tmc2130_spi_transfer(driver, CHOPCONF_ADDR, CHOPCONF);
+    res = tmc2130_spi_transfer(driver, CHOPCONF_ADDR, MSTEPS);
     delayMS(100);
-    res = tmc2130_spi_transfer(driver, PWMCONF_ADDR, PWM_CONF);
-    delayMS(100);
+//    res = tmc2130_spi_transfer(driver, PWMCONF_ADDR, PWM_CONF);
+//    delayMS(100);
     gpio_writePin(&(driver->EN_Pin), LOW);
     return res;
 }
@@ -89,12 +90,15 @@ void tmc2130_rotate_continuous(tmc2130_driver_t *driver, uint8_t dir, uint8_t dc
 }
 
 
-
-
-
-void tmc2130_rotate_steps(tmc2130_driver_t *driver, uint16_t steps, uint16_t dir, uint16_t dc, uint16_t speed){
+void tmc2130_rotate_steps(tmc2130_driver_t *driver, uint16_t steps, uint16_t dir, uint16_t dc, uint16_t speed, motor_select_t motor){
     tmc2130_set_dir(driver, dir);
     float dtc = dc/50.0f;
     uint16_t duty = (uint16_t)(speed * dtc);
-    pwm_set(speed*2, duty, steps);
+    if(motor == ROT_MOTOR){
+        rot_pwm_set(speed*2, duty, steps);
+    }
+    else{
+        inc_pwm_set(speed*2, duty, steps);
+    }
+
 }

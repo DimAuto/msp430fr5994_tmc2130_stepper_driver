@@ -34,8 +34,8 @@ void clock_init(void){
     CSCTL3 = DIVA__1 | DIVS__1 | DIVM__1;   // Set all dividers to 1 for 16MHz operation
     CSCTL0_H = 0;                           // Lock CS registersock CS registers
 
-    P1SEL0 |= BIT2; // Set P1.2 pin for PWM output.
-    P1DIR |= BIT2;
+    P1SEL0 |= BIT2 | BIT3; // Set P1.2 pin for PWM output.
+    P1DIR |= BIT2 | BIT3;
 
     _enable_interrupt();
 }
@@ -49,11 +49,20 @@ void timer_init(void) {
   TA2CCR0 = 2000 - 1;
 }
 
-void pwm_set(uint16_t period, uint16_t dutycycle, uint16_t steps){
+void rot_pwm_set(uint16_t period, uint16_t dutycycle, uint16_t steps){
     step_count = steps;
     TA1CCR0 = period - 1;                       // PWM Period
     TA1CCTL1 = OUTMOD_7;                    // CCR2 reset/set
     TA1CCR1 = dutycycle;                          // CCR2 PWM duty cycle
+    TA1CCTL0 |= CCIE;
+    TA1CTL = TASSEL__SMCLK + MC__UP + ID_3 + TACLR;// SMCLK, up mode, clear TAR
+}
+
+void inc_pwm_set(uint16_t period, uint16_t dutycycle, uint16_t steps){
+    step_count = steps;
+    TA1CCR0 = period - 1;                       // PWM Period
+    TA1CCTL2 = OUTMOD_7;                    // CCR2 reset/set
+    TA1CCR2 = dutycycle;                          // CCR2 PWM duty cycle
     TA1CCTL0 |= CCIE;
     TA1CTL = TASSEL__SMCLK + MC__UP + ID_3 + TACLR;// SMCLK, up mode, clear TAR
 }

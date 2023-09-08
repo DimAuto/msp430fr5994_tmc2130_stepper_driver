@@ -39,6 +39,7 @@ void system_init(void){
     adc_init();
     delayMS(200);
     tmc2130_init(&rot_motor, 5, BIT3, 4, BIT1, 4, BIT2);
+    tmc2130_init(&inc_motor, 2, BIT6, 8, BIT1, 4, BIT3);
     uart_write_DEBUG("Initialized!\r\n", UART_NYX);
 
     // Disable the GPIO power-on default high-impedance mode

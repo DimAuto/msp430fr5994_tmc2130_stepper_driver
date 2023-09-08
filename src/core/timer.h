@@ -48,7 +48,9 @@ int ellapsed_millis(uint16_t st_timer);
  * @param period
  * @param dutycycle
  */
-void pwm_set(uint16_t period, uint16_t dutycycle, uint16_t steps);
+void rot_pwm_set(uint16_t period, uint16_t dutycycle, uint16_t steps);
+
+void inc_pwm_set(uint16_t period, uint16_t dutycycle, uint16_t steps);
 
 /**
  * Stops the PWM output.
