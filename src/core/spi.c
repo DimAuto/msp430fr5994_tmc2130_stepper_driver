@@ -29,6 +29,7 @@
 #include <stdint.h>
 #include "spi.h"
 #include "gpio.h"
+#include "timer.h"
 
 
 
@@ -94,7 +95,7 @@ void CopyArray(uint8_t *source, uint8_t *dest, uint8_t count)
 SPI_Mode SPI_Master_WriteReg(Gpio_Pin *CS_Pin, uint8_t reg_addr, uint8_t *reg_data, uint8_t count)
 {
     MasterMode = TX_REG_ADDRESS_MODE;
-    TransmitRegAddr = reg_addr;
+    TransmitRegAddr = (reg_addr | (1<<7));
 
     //Copy register data to TransmitBuffer
     CopyArray(reg_data, TransmitBuffer, count);
@@ -119,7 +120,7 @@ SPI_Mode SPI_Master_WriteReg(Gpio_Pin *CS_Pin, uint8_t reg_addr, uint8_t *reg_da
 SPI_Mode SPI_Master_ReadReg(Gpio_Pin *CS_Pin, uint8_t reg_addr, uint8_t count)
 {
     MasterMode = TX_REG_ADDRESS_MODE;
-    TransmitRegAddr = reg_addr;
+    TransmitRegAddr = (reg_addr | (0<<7));
     RXByteCtr = count;
     TXByteCtr = 0;
     ReceiveIndex = 0;

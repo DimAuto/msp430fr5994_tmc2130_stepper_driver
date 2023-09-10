@@ -20,7 +20,7 @@ const uint32_t TCOOLTHRS    = 0x00002700;
 const uint32_t THIGH        = 0x00000300;
 const uint32_t COOLCONF     = 0x01000000;
 const uint32_t IHOLDIRUN    = 0x00101010;
-const uint32_t MSTEPS       = 0x10008008;
+const uint32_t MSTEPS       = 0x00008008;
 
 static SPI_Mode tmc2130_spi_transfer(tmc2130_driver_t *driver, uint8_t addr, uint32_t data);
 
@@ -28,11 +28,13 @@ static SPI_Mode tmc2130_spi_transfer(tmc2130_driver_t *driver, uint8_t addr, uin
 SPI_Mode tmc2130_init(tmc2130_driver_t *driver, uint8_t CS_port, uint8_t CS_pin, uint8_t EN_port, uint8_t EN_pin,
                       uint8_t DIR_port, uint8_t DIR_pin){
     SPI_Mode res;
-    gpio_initPin(&(driver->DIR_Pin), DIR_port, DIR_pin, OUTPUT);
-    gpio_initPin(&(driver->CS_Pin), CS_port, CS_pin, OUTPUT);
-    gpio_initPin(&(driver->EN_Pin), EN_port, EN_pin, OUTPUT);
-    gpio_writePin(&(driver->EN_Pin), HIGH);
-    delayMS(200);
+
+    gpio_initPin(&driver->CS_Pin, CS_port, CS_pin, OUTPUT);
+    gpio_initPin(&driver->EN_Pin, EN_port, EN_pin, OUTPUT);
+    gpio_initPin(&driver->DIR_Pin, DIR_port, DIR_pin, OUTPUT);
+
+    gpio_writePin(&driver->EN_Pin, HIGH);
+    delayMS(100);
     res = tmc2130_spi_transfer(driver, GCONF_ADDR, GCONF);
     delayMS(100);
     res = tmc2130_spi_transfer(driver, TCOOLTHRS_ADDR, TCOOLTHRS);
@@ -43,29 +45,29 @@ SPI_Mode tmc2130_init(tmc2130_driver_t *driver, uint8_t CS_port, uint8_t CS_pin,
     delayMS(100);
     res = tmc2130_spi_transfer(driver, IHOLD_IRUN_ADDR, IHOLDIRUN);
     delayMS(100);
-    res = tmc2130_spi_transfer(driver, CHOPCONF_ADDR, MSTEPS);
-    delayMS(100);
-//    res = tmc2130_spi_transfer(driver, PWMCONF_ADDR, PWM_CONF);
+    res = tmc2130_spi_transfer(driver, CHOPCONF_ADDR, CHOPCONF);
 //    delayMS(100);
-    gpio_writePin(&(driver->EN_Pin), LOW);
+//    res = tmc2130_spi_transfer(driver, PWMCONF_ADDR, PWM_CONF);
+    delayMS(200);
+    gpio_writePin(&driver->EN_Pin, LOW);
     return res;
 }
 
 void tmc2130_disable(tmc2130_driver_t *driver){
-    gpio_writePin(&(driver->EN_Pin), HIGH);
+    gpio_writePin(&driver->EN_Pin, HIGH);
 }
 
 void tmc2130_enable(tmc2130_driver_t *driver){
-    gpio_writePin(&(driver->EN_Pin), LOW);
+    gpio_writePin(&driver->EN_Pin, LOW);
 }
 
 SPI_Mode tmc2130_spi_transfer(tmc2130_driver_t *driver, uint8_t addr, uint32_t data){
     uint8_t data_8b[4] = {0};
-    data_8b[3] = (data>>24) & 0xFF;
-    data_8b[2] = (data>>16) & 0xFF;
-    data_8b[1] = (data>>8)  & 0xFF;
-    data_8b[0] = data & 0xFF;
-    return SPI_Master_WriteReg(&(driver->CS_Pin) ,addr, data_8b, 4);
+    data_8b[0] = (data>>24) & 0xFF;
+    data_8b[1] = (data>>16) & 0xFF;
+    data_8b[2] = (data>>8)  & 0xFF;
+    data_8b[3] = data & 0xFF;
+    return SPI_Master_WriteReg(&driver->CS_Pin ,addr, data_8b, 4);
 }
 
 /**
@@ -74,10 +76,10 @@ SPI_Mode tmc2130_spi_transfer(tmc2130_driver_t *driver, uint8_t addr, uint32_t d
  */
 void tmc2130_set_dir(tmc2130_driver_t *driver, uint8_t dir){
     if (dir == 0){
-        gpio_writePin(&(driver->DIR_Pin), LOW);
+        gpio_writePin(&driver->DIR_Pin, LOW);
     }
     else{
-        gpio_writePin(&(driver->DIR_Pin), HIGH);
+        gpio_writePin(&driver->DIR_Pin, HIGH);
     }
 }
 

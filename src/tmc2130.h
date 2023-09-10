@@ -40,7 +40,6 @@ typedef struct{
     Gpio_Pin DIR_Pin;
 }tmc2130_driver_t;
 
-
 typedef enum{
     ROT_MOTOR,
     INC_MOTOR
@@ -48,6 +47,8 @@ typedef enum{
 
 SPI_Mode tmc2130_init(tmc2130_driver_t *driver, uint8_t CS_port, uint8_t CS_pin, uint8_t EN_port, uint8_t EN_pin,
                       uint8_t DIR_port, uint8_t DIR_pin);
+
+//SPI_Mode tmc2130_init(tmc2130_driver_t *driver);
 
 void tmc2130_set_dir(tmc2130_driver_t *driver, uint8_t dir);
 
