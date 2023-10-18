@@ -33,11 +33,27 @@
 #define COOLCONF_ADDR   0x6D
 #define PWMCONF_ADDR    0x70
 
+#define INC_RELEASE_DIR 0
+
+typedef enum{
+    PUSHED,
+    RELEASED,
+    HOLD
+}stopSW_states;
+
+typedef struct{
+    stopSW_states state;
+    uint16_t timer;
+    uint16_t debounce_time;
+    Gpio_Pin led;
+}stopSW_state_t;
 
 typedef struct{
     Gpio_Pin CS_Pin;
     Gpio_Pin EN_Pin;
     Gpio_Pin DIR_Pin;
+    Gpio_Pin Stop_SW;
+    stopSW_state_t StpSW_state;
 }tmc2130_driver_t;
 
 typedef enum{
@@ -46,9 +62,11 @@ typedef enum{
 }motor_select_t;
 
 SPI_Mode tmc2130_init(tmc2130_driver_t *driver, uint8_t CS_port, uint8_t CS_pin, uint8_t EN_port, uint8_t EN_pin,
-                      uint8_t DIR_port, uint8_t DIR_pin);
+                      uint8_t DIR_port, uint8_t DIR_pin, uint8_t StpSW_port, uint8_t StpSW_pin);
 
 //SPI_Mode tmc2130_init(tmc2130_driver_t *driver);
+
+void tick_TerminalSW(tmc2130_driver_t *driver);
 
 void tmc2130_set_dir(tmc2130_driver_t *driver, uint8_t dir);
 
@@ -59,5 +77,9 @@ void tmc2130_rotate_steps(tmc2130_driver_t *driver, uint16_t steps, uint16_t dir
 void tmc2130_enable(tmc2130_driver_t *driver);
 
 void tmc2130_disable(tmc2130_driver_t *driver);
+
+uint8_t get_stop_switch(tmc2130_driver_t *driver);
+
+void goto_start_position(tmc2130_driver_t *driver, motor_select_t motor);
 
 #endif /* SRC_TMC2130_H_ */

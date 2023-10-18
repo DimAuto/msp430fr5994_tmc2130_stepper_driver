@@ -52,10 +52,14 @@ void rot_pwm_set(uint16_t period, uint16_t dutycycle, uint16_t steps);
 
 void inc_pwm_set(uint16_t period, uint16_t dutycycle, uint16_t steps);
 
+uint16_t get_remain_steps(void);
+
 /**
  * Stops the PWM output.
  */
 void pwm_stop(void);
+
+uint8_t get_compl_flag(void);
 
 void watchdog_kick(void);
 

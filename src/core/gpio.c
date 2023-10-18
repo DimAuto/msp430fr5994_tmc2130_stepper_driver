@@ -21,6 +21,8 @@ uint8_t gpio_initPin(Gpio_Pin *pin_t, uint8_t port, uint8_t pin, uint8_t mode) {
       gpio_setMode(&P1DIR, pin_t->pin, mode);
       if (mode == INPUT) {
         pin_t->port = &P1IN;
+        P1REN |= pin_t->pin;    //ENABLE PULLUP - PULLDOWN
+        setBit(*(pin_t->port), pin_t->pin); //ENABLE PULLUP
       } else {
         pin_t->port = &P1OUT;
       }
@@ -30,6 +32,8 @@ uint8_t gpio_initPin(Gpio_Pin *pin_t, uint8_t port, uint8_t pin, uint8_t mode) {
       gpio_setMode(&P2DIR, pin_t->pin, mode);
       if (mode == INPUT) {
         pin_t->port = &P2IN;
+        P2REN |= pin_t->pin;
+        setBit(*(pin_t->port), pin_t->pin);
       } else {
         pin_t->port = &P2OUT;
       }
@@ -39,6 +43,8 @@ uint8_t gpio_initPin(Gpio_Pin *pin_t, uint8_t port, uint8_t pin, uint8_t mode) {
       gpio_setMode(&P3DIR, pin_t->pin, mode);
       if (mode == INPUT) {
         pin_t->port = &P3IN;
+        P3REN |= pin_t->pin;
+        setBit(*(pin_t->port), pin_t->pin);
       } else {
         pin_t->port = &P3OUT;
       }
@@ -48,6 +54,8 @@ uint8_t gpio_initPin(Gpio_Pin *pin_t, uint8_t port, uint8_t pin, uint8_t mode) {
       gpio_setMode(&P4DIR, pin_t->pin, mode);
       if (mode == INPUT) {
         pin_t->port = &P4IN;
+        P4REN |= pin_t->pin;
+        setBit(*(pin_t->port), pin_t->pin);
       } else {
         pin_t->port = &P4OUT;
       }
@@ -57,6 +65,8 @@ uint8_t gpio_initPin(Gpio_Pin *pin_t, uint8_t port, uint8_t pin, uint8_t mode) {
       gpio_setMode(&P5DIR, pin_t->pin, mode);
       if (mode == INPUT) {
         pin_t->port = &P5IN;
+        P5REN |= pin_t->pin;
+        setBit(*(pin_t->port), pin_t->pin);
       } else {
         pin_t->port = &P5OUT;
       }
@@ -66,6 +76,8 @@ uint8_t gpio_initPin(Gpio_Pin *pin_t, uint8_t port, uint8_t pin, uint8_t mode) {
       gpio_setMode(&P6DIR, pin_t->pin, mode);
       if (mode == INPUT) {
         pin_t->port = &P6IN;
+        P6REN |= pin_t->pin;
+        setBit(*(pin_t->port), pin_t->pin);
       } else {
         pin_t->port = &P6OUT;
       }
@@ -75,6 +87,8 @@ uint8_t gpio_initPin(Gpio_Pin *pin_t, uint8_t port, uint8_t pin, uint8_t mode) {
       gpio_setMode(&P7DIR, pin_t->pin, mode);
       if (mode == INPUT) {
         pin_t->port = &P7IN;
+        P7REN |= pin_t->pin;
+        setBit(*(pin_t->port), pin_t->pin);
       } else {
         pin_t->port = &P7OUT;
       }
@@ -84,6 +98,8 @@ uint8_t gpio_initPin(Gpio_Pin *pin_t, uint8_t port, uint8_t pin, uint8_t mode) {
       gpio_setMode(&P8DIR, pin_t->pin, mode);
       if (mode == INPUT) {
         pin_t->port = &P8IN;
+        P8REN |= pin_t->pin;
+        setBit(*(pin_t->port), pin_t->pin);
       } else {
         pin_t->port = &P8OUT;
       }
@@ -93,6 +109,8 @@ uint8_t gpio_initPin(Gpio_Pin *pin_t, uint8_t port, uint8_t pin, uint8_t mode) {
       gpio_setMode(&P9DIR, pin_t->pin, mode);
       if (mode == INPUT) {
         pin_t->port = &P9IN;
+        P9REN |= pin_t->pin;
+        setBit(*(pin_t->port), pin_t->pin);
       } else {
         pin_t->port = &P9OUT;
       }
@@ -137,3 +155,6 @@ uint8_t gpio_pattern(Gpio_Pin *pin_t) {
   }
   return 0;
 }
+
+
+

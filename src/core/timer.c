@@ -14,7 +14,10 @@
 static volatile uint16_t counter;
 static volatile uint16_t ellapsed_mill = 0;
 static volatile uint16_t pwm_counter = 0;
+static volatile uint8_t rot_completion = 0;
+static uint16_t remain_steps = 0;
 static uint16_t step_count = 0;
+static uint16_t speed_sel = 300;
 
 void clock_init(void){
     WDTCTL = WDTPW | WDTHOLD;               // Stop WDT
@@ -33,10 +36,8 @@ void clock_init(void){
     __delay_cycles(60);
     CSCTL3 = DIVA__1 | DIVS__1 | DIVM__1;   // Set all dividers to 1 for 16MHz operation
     CSCTL0_H = 0;                           // Lock CS registersock CS registers
-
     P1SEL0 |= BIT2 | BIT3; // Set P1.2 pin for PWM output.
     P1DIR |= BIT2 | BIT3;
-
     _enable_interrupt();
 }
 
@@ -50,25 +51,44 @@ void timer_init(void) {
 }
 
 void rot_pwm_set(uint16_t period, uint16_t dutycycle, uint16_t steps){
+    rot_completion = 0;
     step_count = steps;
-    TA1CCR0 = period - 1;                       // PWM Period
+    speed_sel = period;
+    TA1CCR0 = 600;                       // PWM Period
     TA1CCTL1 = OUTMOD_7;                    // CCR2 reset/set
     TA1CCR1 = dutycycle;                          // CCR2 PWM duty cycle
+    TA1CCTL2 = OUTMOD_5;
+    TA1CCR2 = 0;
     TA1CCTL0 |= CCIE;
     TA1CTL = TASSEL__SMCLK + MC__UP + ID_3 + TACLR;// SMCLK, up mode, clear TAR
 }
 
 void inc_pwm_set(uint16_t period, uint16_t dutycycle, uint16_t steps){
+    rot_completion = 0;
     step_count = steps;
-    TA1CCR0 = period - 1;                       // PWM Period
+    speed_sel = period;
+    TA1CCR0 = 600;                       // PWM Period
     TA1CCTL2 = OUTMOD_7;                    // CCR2 reset/set
-    TA1CCR2 = dutycycle;                          // CCR2 PWM duty cycle
+    TA1CCR2 = dutycycle;
+    TA1CCTL1 = OUTMOD_5; // CCR2 PWM duty cycle
+    TA1CCR1 = 0;
     TA1CCTL0 |= CCIE;
     TA1CTL = TASSEL__SMCLK + MC__UP + ID_3 + TACLR;// SMCLK, up mode, clear TAR
 }
 
 void pwm_stop(void){
     TA1CTL = MC__STOP;
+    remain_steps = step_count - pwm_counter;
+    rot_completion = 0;
+    pwm_counter = 0;
+}
+
+uint8_t get_compl_flag(void){
+    return rot_completion;
+}
+
+uint16_t get_remain_steps(void){
+    return remain_steps;
 }
 
 void timer_deinit(void) {
@@ -124,6 +144,13 @@ __interrupt void Timer1_A0_ISR(void){
     if ((pwm_counter >= step_count) && (step_count != 0)){
         TA1CTL = MC__STOP;  // Stop PWM
         pwm_counter = 0;
+        rot_completion = 1;
+    }
+    if ((pwm_counter >= 512) && (pwm_counter <= step_count)){
+        TA1CCR0 = speed_sel;
+    }
+    else if ((pwm_counter >= step_count - 512) && (pwm_counter <= step_count)){
+        TA1CCR0 = 600;
     }
 }
 

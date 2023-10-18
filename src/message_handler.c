@@ -310,6 +310,9 @@ void handler(UART_select device){
     case 0xC2:
         tmc2130_disable(&inc_motor);
         break;
+    case 0xC3:
+        goto_start_position(&inc_motor, INC_MOTOR);
+        break;
     default:
         break;
     }
